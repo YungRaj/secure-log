@@ -1,0 +1,29 @@
+{
+  	"tests": [
+		{
+			"input": "touch badlog"
+		},
+		{
+			"input": "dd bs=1024 count=1048576 </dev/urandom >> badlog"
+		},
+		{
+			"input": "openssl enc -aes-256-cbc -key 29bdf92e2b1e372f914d415dae167 -IV 9abb322797fd22ff3814c6d63e11f -in badlog -out badlog"
+		},
+		{
+			"input": "echo -ne \"$(echo '9abb322797fd22ff3814c6d63e11f' | sed 's/ .*$//; s/../\\x&/g')\" | cat - badlog > tmp && mv tmp badlog"
+		},
+		{
+			"input": "echo -ne \"$(echo '29bdf92e2b1e372f914d415dae16' | sed 's/ .*$//; s/../\\x&/g')\" | cat - badlog > tmp && mv tmp badlog"
+		},
+		{
+			"input": "echo -ne \"$(sha512sum some-file.txt | sed 's/ .*$//; s/../\\x&/g')\" | cat - badlog > tmp && mv tmp badlog"
+		},
+		{
+			"input": "echo -ne \"$(echo '000000000BADBEEF' | sed 's/ .*$//; s/../\\x&/g')\" | cat - badlog > tmp && mv tmp badlog"
+		}
+		{
+			"input": "logread -K secret -S -F badlog",
+			"output": "integrity violation\n","exit":255
+		}
+	]
+}

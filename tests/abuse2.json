@@ -1,0 +1,14 @@
+{
+  	"tests": [
+		{
+			"input": "touch badlog"
+		},
+		{
+			"input": "dd bs=1024 count=1048576 </dev/urandom >> badlog"
+		},
+		{
+			"input": "logread -K secret -S -F badlog",
+			"output": "integrity violation\n","exit":255
+		}
+	]
+}

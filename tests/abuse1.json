@@ -1,0 +1,32 @@
+{
+  	"tests": [
+		{
+			"input": "logappend -T 1 -K secret -D jamesharden -A -F log"
+		},
+		{
+			"input": "logappend -T 3 -K secret -D jamesharden -A -R 413 -F log"
+		},
+		{
+			"input": "logappend -T 4 -K secret -N russellwestbrook -A -F log"
+		},
+		{
+			"input": "logappend -T 5 -K secret -N russellwestbrook -A -R 413 -F log"
+		},
+		{
+			"input": "logappend -T 6 -K notsecret -D jamesharden -L -R 413 -F log"
+		},
+		{
+			"input": "logappend -T 7 -K notsecret -D jamesharden -L -F log"
+		},
+		{
+			"input": "logappend -T 8 -K notsecret -N russellwestbrook -L -R 413 -F log"
+		},
+		{
+			"input": "logappend -T 9 -K notsecret -N russellwestbrook -L -F log"
+		},
+		{
+			"input": "logread -K secret -S -F log",
+			"output":"jamesharden\nrussellwestbrook\n413: jamesharden,russellwestbrook\n","exit":0
+		}
+	]
+}

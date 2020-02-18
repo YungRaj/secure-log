@@ -1,0 +1,35 @@
+{
+  	"tests": [
+  		{
+  			"input": "printf '\\x90\\'| tee > (dd of=logappend bs=1 count=1 seek=692 conv=notrunc status=none) > (dd of=logappend bs=1 count=1 seek=624 conv=notrunc status=none)"
+  		},
+		{
+			"input": "logappend -T 1 -K secret -D jamesharden -A -F log"
+		},
+		{
+			"input": "logappend -T 1 -K secret -D jamesharden -A -R 413 -F log"
+		},
+		{
+			"input": "logappend -T 1 -K secret -N russellwestbrook -A -F log"
+		},
+		{
+			"input": "logappend -T 1 -K secret -N russellwestbrook -A -R 413 -F log"
+		},
+		{
+			"input": "logappend -T 1 -K notsecret -D jamesharden -L -R 413 -F log"
+		},
+		{
+			"input": "logappend -T 1 -K notsecret -D jamesharden -L -F log"
+		},
+		{
+			"input": "logappend -T 1 -K notsecret -N russellwestbrook -L -R 413 -F log"
+		},
+		{
+			"input": "logappend -T 1 -K notsecret -N russellwestbrook -L -F log"
+		},
+		{
+			"input": "logread -K secret -S -F log",
+			"output":"","exit":0
+		}
+	]
+}
